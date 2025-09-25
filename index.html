@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ceramics Studio - Handcrafted Pottery</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Stardi Cer</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" data-en="Home" data-hr="Početna">Početna</a></li>
+                <li><a href="#shop" data-en="Shop" data-hr="Trgovina">Trgovina</a></li>
+                <li><a href="#gallery" data-en="Gallery" data-hr="Galerija">Galerija</a></li>
+                <li><a href="#about" data-en="About" data-hr="O nama">O nama</a></li>
+                <li><a href="#contact" data-en="Contact" data-hr="Kontakt">Kontakt</a></li>
+            </ul>
+            <div class="language-switcher">
+                <button class="lang-btn active" onclick="changeLanguage('hr')">HR</button>
+                <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
+            </div>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒 <span id="cart-count">0</span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2 data-en="Handcrafted Ceramics" data-hr="Ručno izrađena keramika">Ručno izrađena keramika</h2>
+                <p data-en="Beautiful pottery made with passion and tradition" data-hr="Prekrasna keramika napravljena sa strašću i tradicijom">Prekrasna keramika napravljena sa strašću i tradicijom</p>
+                <a href="#gallery" class="cta-button" data-en="View Gallery" data-hr="Pogledaj galeriju">Pogledaj galeriju</a>
+            </div>
+        </section>
+
+        <section id="shop" class="shop">
+            <h2 data-en="Shop Our Ceramics" data-hr="Kupuj našu keramiku">Kupuj našu keramiku</h2>
+            
+            <!-- Category Filters -->
+            <div class="category-filters">
+                <button class="filter-btn active" onclick="filterProducts('all')" data-en="All" data-hr="Sve">Sve</button>
+                <button class="filter-btn" onclick="filterProducts('plates')" data-en="Plates" data-hr="Tanjuri">Tanjuri</button>
+                <button class="filter-btn" onclick="filterProducts('cups')" data-en="Cups" data-hr="Šalice">Šalice</button>
+                <button class="filter-btn" onclick="filterProducts('bowls')" data-en="Bowls" data-hr="Zdjele">Zdjele</button>
+                <button class="filter-btn" onclick="filterProducts('vases')" data-en="Vases" data-hr="Vaze">Vaze</button>
+            </div>
+            
+            <div class="shop-grid">
+                <div class="shop-item" data-category="bowls">
+                    <img src="images/pottery1.jpeg" alt="Handmade Bowl">
+                    <div class="item-info">
+                        <h3 data-en="Handmade Bowl" data-hr="Ručno izrađena zdjela">Ručno izrađena zdjela</h3>
+                        <p data-en="Beautiful ceramic bowl perfect for serving" data-hr="Prekrasna keramička zdjela savršena za posluživanje">Prekrasna keramička zdjela savršena za posluživanje</p>
+                        <div class="category-tag" data-en="Bowls" data-hr="Zdjele">Zdjele</div>
+                        <div class="price">€45.00</div>
+                        <button class="add-to-cart" onclick="addToCart('Handmade Bowl', 45.00, 'images/pottery1.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
+                    </div>
+                </div>
+                <div class="shop-item" data-category="vases">
+                    <img src="images/pottery2.jpeg" alt="Ceramic Vase">
+                    <div class="item-info">
+                        <h3 data-en="Ceramic Vase" data-hr="Keramička vaza">Keramička vaza</h3>
+                        <p data-en="Elegant vase for your favorite flowers" data-hr="Elegantna vaza za vaše omiljeno cvijeće">Elegantna vaza za vaše omiljeno cvijeće</p>
+                        <div class="category-tag" data-en="Vases" data-hr="Vaze">Vaze</div>
+                        <div class="price">€65.00</div>
+                        <button class="add-to-cart" onclick="addToCart('Ceramic Vase', 65.00, 'images/pottery2.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
+                    </div>
+                </div>
+                <div class="shop-item" data-category="cups">
+                    <img src="images/pottery3.jpeg" alt="Coffee Mug">
+                    <div class="item-info">
+                        <h3 data-en="Coffee Mug" data-hr="Šalica za kavu">Šalica za kavu</h3>
+                        <p data-en="Perfect mug for your morning coffee" data-hr="Savršena šalica za vašu jutarnju kavu">Savršena šalica za vašu jutarnju kavu</p>
+                        <div class="category-tag" data-en="Cups" data-hr="Šalice">Šalice</div>
+                        <div class="price">€25.00</div>
+                        <button class="add-to-cart" onclick="addToCart('Coffee Mug', 25.00, 'images/pottery3.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
+                    </div>
+                </div>
+                <div class="shop-item" data-category="plates">
+                    <img src="images/pottery4.jpeg" alt="Decorative Plate">
+                    <div class="item-info">
+                        <h3 data-en="Decorative Plate" data-hr="Ukrasni tanjur">Ukrasni tanjur</h3>
+                        <p data-en="Beautiful plate for display or dining" data-hr="Prekrasan tanjur za izlaganje ili blagovanje">Prekrasan tanjur za izlaganje ili blagovanje</p>
+                        <div class="category-tag" data-en="Plates" data-hr="Tanjuri">Tanjuri</div>
+                        <div class="price">€35.00</div>
+                        <button class="add-to-cart" onclick="addToCart('Decorative Plate', 35.00, 'images/pottery4.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
+                    </div>
+                </div>
+                <div class="shop-item" data-category="vases">
+                    <img src="images/pottery5.jpeg" alt="Ceramic Pitcher">
+                    <div class="item-info">
+                        <h3 data-en="Ceramic Pitcher" data-hr="Keramički vrč">Keramički vrč</h3>
+                        <p data-en="Stylish pitcher for water or juice" data-hr="Elegantan vrč za vodu ili sok">Elegantan vrč za vodu ili sok</p>
+                        <div class="category-tag" data-en="Vases" data-hr="Vaze">Vaze</div>
+                        <div class="price">€55.00</div>
+                        <button class="add-to-cart" onclick="addToCart('Ceramic Pitcher', 55.00, 'images/pottery5.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
+                    </div>
+                </div>
+                <div class="shop-item" data-category="cups">
+                    <img src="images/pottery6.jpeg" alt="Tea Cup Set">
+                    <div class="item-info">
+                        <h3 data-en="Tea Cup Set" data-hr="Set šalica za čaj">Set šalica za čaj</h3>
+                        <p data-en="Complete tea cup set for special occasions" data-hr="Kompletan set šalica za posebne prilike">Kompletan set šalica za posebne prilike</p>
+                        <div class="category-tag" data-en="Cups" data-hr="Šalice">Šalice</div>
+                        <div class="price">€120.00</div>
+                        <button class="add-to-cart" onclick="addToCart('Tea Cup Set', 120.00, 'images/pottery6.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
+                    </div>
+                </div>
+                <div class="shop-item" data-category="bowls">
+                    <img src="images/pottery7.jpeg" alt="Large Serving Bowl">
+                    <div class="item-info">
+                        <h3 data-en="Large Serving Bowl" data-hr="Velika zdjela za posluživanje">Velika zdjela za posluživanje</h3>
+                        <p data-en="Perfect for family meals and gatherings" data-hr="Savršena za obiteljske obroke i okupljanja">Savršena za obiteljske obroke i okupljanja</p>
+                        <div class="category-tag" data-en="Bowls" data-hr="Zdjele">Zdjele</div>
+                        <div class="price">€75.00</div>
+                        <button class="add-to-cart" onclick="addToCart('Large Serving Bowl', 75.00, 'images/pottery7.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
+                    </div>
+                </div>
+                <div class="shop-item" data-category="plates">
+                    <img src="images/pottery8.jpeg" alt="Dinner Plate Set">
+                    <div class="item-info">
+                        <h3 data-en="Dinner Plate Set" data-hr="Set tanjura za večeru">Set tanjura za večeru</h3>
+                        <p data-en="Set of 4 elegant dinner plates" data-hr="Set od 4 elegantna tanjura za večeru">Set od 4 elegantna tanjura za večeru</p>
+                        <div class="category-tag" data-en="Plates" data-hr="Tanjuri">Tanjuri</div>
+                        <div class="price">€95.00</div>
+                        <button class="add-to-cart" onclick="addToCart('Dinner Plate Set', 95.00, 'images/pottery8.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
+                    </div>
+                </div>
+                <div class="shop-item" data-category="bowls">
+                    <img src="images/pottery9.jpeg" alt="Cereal Bowl Set">
+                    <div class="item-info">
+                        <h3 data-en="Cereal Bowl Set" data-hr="Set zdjela za žitarice">Set zdjela za žitarice</h3>
+                        <p data-en="Set of 6 perfect breakfast bowls" data-hr="Set od 6 savršenih zdjela za doručak">Set od 6 savršenih zdjela za doručak</p>
+                        <div class="category-tag" data-en="Bowls" data-hr="Zdjele">Zdjele</div>
+                        <div class="price">€85.00</div>
+                        <button class="add-to-cart" onclick="addToCart('Cereal Bowl Set', 85.00, 'images/pottery9.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="gallery">
+            <h2 data-en="Our Collection" data-hr="Naša kolekcija">Naša kolekcija</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox(0)">
+                    <img src="images/pottery1.jpeg" alt="Ceramic Bowl" data-en="Ceramic Bowl" data-hr="Keramička zdjela">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(1)">
+                    <img src="images/pottery2.jpeg" alt="Ceramic Vase" data-en="Ceramic Vase" data-hr="Keramička vaza">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(2)">
+                    <img src="images/pottery3.jpeg" alt="Ceramic Mug" data-en="Ceramic Mug" data-hr="Keramička šalica">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(3)">
+                    <img src="images/pottery4.jpeg" alt="Ceramic Piece" data-en="Ceramic Piece" data-hr="Keramički komad">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(4)">
+                    <img src="images/pottery5.jpeg" alt="Ceramic Art" data-en="Ceramic Art" data-hr="Keramička umjetnost">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(5)">
+                    <img src="images/pottery6.jpeg" alt="Handmade Pottery" data-en="Handmade Pottery" data-hr="Ručno izrađena keramika">
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <h2 data-en="About Us" data-hr="O nama">O nama</h2>
+            <p data-en="We are passionate ceramicists dedicated to creating beautiful, functional pottery. Each piece is carefully crafted by hand using traditional techniques passed down through generations." data-hr="Mi smo strastveni keramičari posvećeni stvaranju prekrasne, funkcionalne keramike. Svaki komad je pažljivo ručno izrađen koristeći tradicionalne tehnike prenošene kroz generacije.">Mi smo strastveni keramičari posvećeni stvaranju prekrasne, funkcionalne keramike. Svaki komad je pažljivo ručno izrađen koristeći tradicionalne tehnike prenošene kroz generacije.</p>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2 data-en="Contact" data-hr="Kontakt">Kontakt</h2>
+            <div class="contact-info">
+                <p><span data-en="Email" data-hr="Email">Email</span>: info@stardicer.hr</p>
+                <p><span data-en="Phone" data-hr="Telefon">Telefon</span>: +385 91 123 4567</p>
+                <p><span data-en="Address" data-hr="Adresa">Adresa</span>: Keramička 123, Zagreb</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p data-en="&copy; 2025 Stardi Ceramics. All rights reserved." data-hr="&copy; 2025 Stardi Keramika. Sva prava pridržana.">&copy; 2025 Stardi Keramika. Sva prava pridržana.</p>
+    </footer>
+
+    <!-- Shopping Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3 data-en="Shopping Cart" data-hr="Košarica">Košarica</h3>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <p class="empty-cart" data-en="Your cart is empty" data-hr="Vaša košarica je prazna">Vaša košarica je prazna</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong><span data-en="Total" data-hr="Ukupno">Ukupno</span>: $<span id="cart-total">0.00</span></strong>
+            </div>
+            <button class="checkout-btn" onclick="checkout()" id="checkout-btn" disabled data-en="Checkout" data-hr="Naruči">Naruči</button>
+        </div>
+    </div>
+    
+    <!-- Cart Overlay -->
+    <div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
+    
+    <!-- Lightbox Gallery -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <img id="lightbox-image" src="" alt="">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+            <div class="lightbox-nav">
+                <button class="lightbox-prev" onclick="changeLightboxImage(-1)">❮</button>
+                <button class="lightbox-next" onclick="changeLightboxImage(1)">❯</button>
+            </div>
+            <div class="lightbox-counter">
+                <span id="image-counter">1 / 6</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
