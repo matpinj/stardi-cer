@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ceramics Studio - Handcrafted Pottery</title>
+    <link id="theme-css" rel="stylesheet" href="css/themes/option1.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -29,8 +30,54 @@
         </nav>
     </header>
 
-    <main>
+    <!-- Video Entrance - DISABLED for Option 5 -->
+    <div id="video-entrance" class="video-entrance hidden">
+        <video id="entrance-video" autoplay muted playsinline preload="auto">
+            <source src="videos/intro.mp4" type="video/mp4">
+            <source src="videos/IMG_2262.MOV" type="video/mp4">
+            <source src="videos/IMG_2262.MOV" type="video/quicktime">
+            Your browser does not support the video tag.
+        </video>
+        
+        <!-- Fallback for browsers that don't support video -->
+        <div class="video-fallback" style="display: none;">
+            <img src="images/pottery1.jpeg" alt="Stardi Cer Ceramics Studio">
+        </div>
+        
+        <!-- Skip/Enter button overlay -->
+        <div class="video-overlay">
+            <button class="skip-intro-btn" onclick="enterSite()">
+                <span class="skip-text" data-en="Skip Intro" data-hr="Preskoči uvod">Preskoči uvod</span>
+                <div class="skip-progress"></div>
+            </button>
+        </div>
+        
+        <!-- Video progress indicator -->
+        <div class="video-progress-bar">
+            <div class="video-progress-fill"></div>
+        </div>
+        
+        <!-- Debug info (remove this later) -->
+        <div id="debug-info" style="position: absolute; top: 10px; left: 10px; color: white; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 5px; font-size: 12px; z-index: 10;">
+            Loading video...
+        </div>
+    </div>
+
+    <main id="main-content">
         <section id="home" class="hero">
+            <!-- Video Background for Option 5 -->
+            <div class="hero-video-bg">
+                <video id="hero-bg-video" muted loop playsinline preload="auto">
+                    <source src="videos/IMG_2262.mp4" type="video/mp4">
+                    <source src="videos/IMG_2262.MOV" type="video/quicktime">
+                    Your browser does not support the video tag.
+                </video>
+                <!-- Fallback image if video doesn't work -->
+                <div class="video-bg-fallback">
+                    <img src="images/pottery1.jpeg" alt="Pottery Background">
+                </div>
+            </div>
+            
             <div class="hero-content">
                 <h2 data-en="Handcrafted Ceramics" data-hr="Ručno izrađena keramika">Ručno izrađena keramika</h2>
                 <p data-en="Beautiful pottery made with passion and tradition" data-hr="Prekrasna keramika napravljena sa strašću i tradicijom">Prekrasna keramika napravljena sa strašću i tradicijom</p>
@@ -221,6 +268,21 @@
                 <span id="image-counter">1 / 6</span>
             </div>
         </div>
+    </div>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <h4>Design Options</h4>
+        <button class="theme-option active" onclick="switchTheme('option1')">Minimalist Modern</button>
+        <button class="theme-option" onclick="switchTheme('option2')">Bold & Fluid</button>
+        <button class="theme-option" onclick="switchTheme('option3')">Regular & Rigid</button>
+        <button class="theme-option" onclick="switchTheme('option4')">Clean Contemporary</button>
+        <button class="theme-option" onclick="switchTheme('option5')">Playful & Warm</button>
+    </div>
+    
+    <!-- Theme Loading Overlay -->
+    <div id="theme-switching" class="theme-switching">
+        <div class="loader"></div>
     </div>
 
     <script src="js/script.js"></script>
