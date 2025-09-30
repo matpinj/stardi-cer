@@ -3,287 +3,343 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ceramics Studio - Handcrafted Pottery</title>
-    <link id="theme-css" rel="stylesheet" href="css/themes/option1.css">
+    <title>STARDI CER</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <nav>
+    <!-- Header Navigation -->
+    <header class="main-header">
+        <div class="header-content">
             <div class="logo">
-                <h1>Stardi Cer</h1>
+                <h1>STARDI CER</h1>
             </div>
-            <ul class="nav-links">
-                <li><a href="#home" data-en="Home" data-hr="Početna">Početna</a></li>
-                <li><a href="#shop" data-en="Shop" data-hr="Trgovina">Trgovina</a></li>
-                <li><a href="#gallery" data-en="Gallery" data-hr="Galerija">Galerija</a></li>
-                <li><a href="#about" data-en="About" data-hr="O nama">O nama</a></li>
-                <li><a href="#contact" data-en="Contact" data-hr="Kontakt">Kontakt</a></li>
-            </ul>
-            <div class="language-switcher">
-                <button class="lang-btn active" onclick="changeLanguage('hr')">HR</button>
-                <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
-            </div>
-            <div class="cart-icon" onclick="toggleCart()">
-                🛒 <span id="cart-count">0</span>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Video Entrance - DISABLED for Option 5 -->
-    <div id="video-entrance" class="video-entrance hidden">
-        <video id="entrance-video" autoplay muted playsinline preload="auto">
-            <source src="videos/intro.mp4" type="video/mp4">
-            <source src="videos/IMG_2262.MOV" type="video/mp4">
-            <source src="videos/IMG_2262.MOV" type="video/quicktime">
-            Your browser does not support the video tag.
-        </video>
-        
-        <!-- Fallback for browsers that don't support video -->
-        <div class="video-fallback" style="display: none;">
-            <img src="images/pottery1.jpeg" alt="Stardi Cer Ceramics Studio">
-        </div>
-        
-        <!-- Skip/Enter button overlay -->
-        <div class="video-overlay">
-            <button class="skip-intro-btn" onclick="enterSite()">
-                <span class="skip-text" data-en="Skip Intro" data-hr="Preskoči uvod">Preskoči uvod</span>
-                <div class="skip-progress"></div>
+            <!-- Hamburger Menu Button -->
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
             </button>
         </div>
-        
-        <!-- Video progress indicator -->
-        <div class="video-progress-bar">
-            <div class="video-progress-fill"></div>
+    </header>
+
+    <!-- Full Screen Navigation Overlay -->
+    <nav class="nav-overlay">
+        <div class="nav-content">
+            <div class="nav-menu">
+                <a href="#home" class="nav-link" data-en="HOME" data-hr="POČETNA">
+                    <span class="nav-text">
+                        <span class="nav-text-inner" data-en="HOME" data-hr="POČETNA">HOME</span>
+                        <span class="nav-text-clone" data-en="HOME" data-hr="POČETNA">HOME</span>
+                    </span>
+                </a>
+                <a href="#work" class="nav-link" data-en="WORK" data-hr="RAD">
+                    <span class="nav-text">
+                        <span class="nav-text-inner" data-en="WORK" data-hr="RAD">WORK</span>
+                        <span class="nav-text-clone" data-en="WORK" data-hr="RAD">WORK</span>
+                    </span>
+                </a>
+                <a href="#shop" class="nav-link" data-en="SHOP" data-hr="TRGOVINA">
+                    <span class="nav-text">
+                        <span class="nav-text-inner" data-en="SHOP" data-hr="TRGOVINA">SHOP</span>
+                        <span class="nav-text-clone" data-en="SHOP" data-hr="TRGOVINA">SHOP</span>
+                    </span>
+                </a>
+                <a href="#about" class="nav-link" data-en="ABOUT" data-hr="O NAMA">
+                    <span class="nav-text">
+                        <span class="nav-text-inner" data-en="ABOUT" data-hr="O NAMA">ABOUT</span>
+                        <span class="nav-text-clone" data-en="ABOUT" data-hr="O NAMA">ABOUT</span>
+                    </span>
+                </a>
+                <a href="#contact" class="nav-link" data-en="CONTACT" data-hr="KONTAKT">
+                    <span class="nav-text">
+                        <span class="nav-text-inner" data-en="CONTACT" data-hr="KONTAKT">CONTACT</span>
+                        <span class="nav-text-clone" data-en="CONTACT" data-hr="KONTAKT">CONTACT</span>
+                    </span>
+                </a>
+                
+                <!-- Language Toggle -->
+                <div class="language-toggle">
+                    <button class="lang-btn active" data-lang="en">ENGLISH</button>
+                    <span class="lang-separator">/</span>
+                    <button class="lang-btn" data-lang="hr">HRVATSKI</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-title">
+                <h2>STARDI CER</h2>
+            </div>
+            <div class="hero-subtitle">
+                <p data-en="C E R A M I C S" data-hr="K E R A M I K A">C E R A M I C S</p>
+            </div>
+            <div class="hero-tagline">
+                <p data-en="Each Piece Is Crafted With Care" data-hr="Svaki komad je rađen s pažnjom">Each Piece Is Crafted With Care</p>
+            </div>
+            <div class="hero-buttons">
+                <a href="#shop" class="cta-button" data-en="SHOP" data-hr="TRGOVINA">
+                    <span class="cta-text">
+                        <span class="cta-text-inner" data-en="SHOP" data-hr="TRGOVINA">SHOP</span>
+                        <span class="cta-text-clone" data-en="SHOP" data-hr="TRGOVINA">SHOP</span>
+                    </span>
+                </a>
+                <a href="#contact" class="cta-button" data-en="GET IN TOUCH" data-hr="STUPITE U KONTAKT">
+                    <span class="cta-text">
+                        <span class="cta-text-inner" data-en="GET IN TOUCH" data-hr="STUPITE U KONTAKT">GET IN TOUCH</span>
+                        <span class="cta-text-clone" data-en="GET IN TOUCH" data-hr="STUPITE U KONTAKT">GET IN TOUCH</span>
+                    </span>
+                </a>
+            </div>
         </div>
         
-        <!-- Debug info (remove this later) -->
-        <div id="debug-info" style="position: absolute; top: 10px; left: 10px; color: white; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 5px; font-size: 12px; z-index: 10;">
-            Loading video...
+        <div class="hero-philosophy">
+            <h3>STRENGTH IN</h3>
+            <h2>SOFTNESS</h2>
         </div>
-    </div>
+    </section>
 
-    <main id="main-content">
-        <section id="home" class="hero">
-            <!-- Video Background for Option 5 -->
-            <div class="hero-video-bg">
-                <video id="hero-bg-video" muted loop playsinline preload="auto">
-                    <source src="videos/IMG_2262.mp4" type="video/mp4">
-                    <source src="videos/IMG_2262.MOV" type="video/quicktime">
-                    Your browser does not support the video tag.
-                </video>
-                <!-- Fallback image if video doesn't work -->
-                <div class="video-bg-fallback">
-                    <img src="images/pottery1.jpeg" alt="Pottery Background">
+    <!-- Philosophy Section -->
+    <section class="philosophy">
+        <div class="philosophy-content">
+            <h2 data-en="M E A N I N G" data-hr="Z N A Č E N J E">M E A N I N G</h2>
+            <h3 data-en="O F  C E R A M I C S" data-hr="K E R A M I K E">O F  C E R A M I C S</h3>
+            <p class="philosophy-subtitle" data-en="( 陶 瓷 的 寓 意 )" data-hr="( značenje keramike )">( 陶 瓷 的 寓 意 )</p>
+            
+            <div class="philosophy-text">
+                <p data-en="It combines the beauty of the various vessels with the elegance of profound craftsmanship. It roots in every form of our lives." data-hr="Spaja ljepotu različitih posuda sa elegancijom dubokog zanatstva. Ukorijenjena je u svim oblicima naših života.">It combines the beauty of the various vessels with the elegance of profound craftsmanship. It roots in every form of our lives.</p>
+                
+                <p data-en="Every time you use it, you will gain different experiences. Sometimes it seems to be rough while delicate. But what I feel more is the toughness of its perfection. It is just like the courage of the female to turn the soft temperament into strength." data-hr="Svaki put kada ga koristite, dobit ćete drugačija iskustva. Ponekad se čini grubljim a opet delikatnim. Ali ono što više osjećam je čvrstoća njegove savršenosti. Baš kao hrabrost žene da meki temperament pretvori u snagu.">Every time you use it, you will gain different experiences. Sometimes it seems to be rough while delicate. But what I feel more is the toughness of its perfection. It is just like the courage of the female to turn the soft temperament into strength.</p>
+            </div>
+            
+            <a href="#work" class="see-all-button" data-en="SEE ALL WORKS" data-hr="POGLEDAJTE SVE RADOVE">SEE ALL WORKS</a>
+        </div>
+        
+        <div class="scroll-indicator">
+            <p>SCROLL DOWN</p>
+        </div>
+    </section>
+
+    <!-- Way of Seeing Section -->
+    <section class="way-of-seeing">
+        <div class="way-content">
+            <h2>WAY OF SEEING</h2>
+            <p class="subtitle">(观赏的方法)</p>
+            
+            <div class="seeing-attributes">
+                <div class="attribute">
+                    <p>TINTING · SHADE</p>
+                </div>
+                <div class="attribute">
+                    <p>TEMPERATURE · TEXTURE</p>
+                </div>
+                <div class="attribute">
+                    <p>SHAPE · QUALITY</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Categories Section -->
+    <section id="work" class="work-categories">
+        <div class="category">
+            <div class="category-content">
+                <h2>C U P S &</h2>
+                <h2>S A U C E R S</h2>
+                <p class="category-number">001</p>
+                <p class="category-subtitle">( 杯 具 )</p>
+                <a href="#cups" class="learn-more-button">LEARN MORE LEARN MORE</a>
+            </div>
+            <div class="category-image">
+                <img src="images/pottery1.jpeg" alt="Cups and Saucers">
+            </div>
+        </div>
+
+        <div class="category reverse">
+            <div class="category-image">
+                <img src="images/pottery2.jpeg" alt="Hand Building">
+            </div>
+            <div class="category-content">
+                <h2>H A N D</h2>
+                <h2>B U I L D I N G</h2>
+                <p class="category-number">002</p>
+                <p class="category-subtitle">( 手 工 )</p>
+                <a href="#handbuilding" class="learn-more-button">LEARN MORE LEARN MORE</a>
+            </div>
+        </div>
+
+        <div class="category">
+            <div class="category-content">
+                <h2>T E A P O T S</h2>
+                <p class="category-number">003</p>
+                <p class="category-subtitle">( 茶 壶 )</p>
+                <a href="#teapots" class="learn-more-button">LEARN MORE LEARN MORE</a>
+            </div>
+            <div class="category-image">
+                <img src="images/pottery3.jpeg" alt="Teapots">
+            </div>
+        </div>
+    </section>
+
+    <!-- Dialogue Section -->
+    <section class="dialogue">
+        <div class="dialogue-content">
+            <h2>A DIALOGUE</h2>
+            <h2>WITH CLAY</h2>
+            
+            <div class="dialogue-text">
+                <p>M y  w o r k s  a r e  n o t  m e a n t  t o  i m p r e s s  a t  f i r s t  s i g h t .</p>
+                <p>T h e y  a r e  m e a n t  t o  g r o w  w i t h  y o u ,  q u i e t l y .</p>
+                <p class="chinese">我 的 作 品 不 是 为 了 惊 艳 第 一 眼 ，</p>
+                <p class="chinese">而 是 为 了 在 日 常 中 与 你 慢 慢 相 处 。</p>
+                
+                <p>I  p a y  a t t e n t i o n  t o  p r o p o r t i o n s ,  w e i g h t ,  a n d  t h e  f e e l  i n  h a n d .</p>
+                <p>H o w  a  c u p  t o u c h e s  y o u r  l i p .  H o w  a  b o w l  s i t s  o n  a  t a b l e .</p>
+                <p class="chinese">我 在 意 器 物 的 比 例 、 重 量 与 手 感 。</p>
+                <p class="chinese">在 意 杯 沿 触 碰 唇 齿 的 瞬 间 ， 碗 落 于 桌 面 的 姿 态 。</p>
+                
+                <p>E v e r y  p i e c e  i s  s h a p e d  n o t  t o  b e  p e r f e c t ,  b u t  t o  b e  a l i v e .</p>
+                <p>E a c h  o n e  c a r r i e s  t r a c e s  o f  t h e  h a n d ,  t h e  m o m e n t ,  t h e  b r e a t h .</p>
+                <p class="chinese">每 件 作 品 并 不 追 求 完 美 ，</p>
+                <p class="chinese">而 是 要 保 留 生 命 的 痕 迹 — — 手 感 、 时 间 与 呼 吸 。</p>
+            </div>
+            
+            <a href="#work" class="see-all-button">SEE ALL WORKS</a>
+        </div>
+    </section>
+
+    <!-- Design Philosophy Section -->
+    <section class="design-philosophy">
+        <div class="philosophy-header">
+            <h2>D E S I G N</h2>
+            <h2>P H I L O S O P H Y</h2>
+            <p class="subtitle">( 设 计 的 理 念 )</p>
+        </div>
+    </section>
+
+    <!-- Waiting to be Chosen Section -->
+    <section class="waiting-section">
+        <div class="waiting-content">
+            <h2>WAITING TO BE CHOSEN</h2>
+            <p class="subtitle">(挑选的时刻)</p>
+            
+            <h3>EACH PIECE</h3>
+            <h3>CARRIES A STORY</h3>
+            
+            <p class="story-tagline">— NOW IT'S TIME</p>
+            <p class="story-tagline">TO CREATE YOURS</p>
+            
+            <div class="story-text">
+                <p>E a c h  p i e c e  i s  h a n d c r a f t e d  w i t h  c a r e ,  o n e  a t  a  t i m e .</p>
+                <p>F r o m  f o r m  t o  f i n i s h ,  e v e r y  d e t a i l  i s  t h o u g h t f u l l y  r e f i n e d .</p>
+                <p>W e  o f f e r  a  s m a l l  s e l e c t i o n  o f  r e a d y - m a d e  w o r k s ,</p>
+                <p>a n d  a c c e p t  c u s t o m  o r d e r s  f o r  t h o s e  l o o k i n g  f o r  s o m e t h i n g  t r u l y  p e r s o n a l .</p>
+            </div>
+            
+            <a href="#contact" class="bring-home-button">BRING YOUR CERAMIC HOME</a>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section id="shop" class="shop">
+        <div class="shop-content">
+            <h2 data-en="SHOP" data-hr="TRGOVINA">SHOP</h2>
+            <div class="shop-intro">
+                <p data-en="Discover our curated collection of handcrafted ceramics. Each piece tells a story of tradition, artistry, and passion." data-hr="Otkrijte našu pažljivo odabranu kolekciju ručno izrađene keramike. Svaki komad priča priču o tradiciji, umjetnosti i strasti.">
+                    Discover our curated collection of handcrafted ceramics. Each piece tells a story of tradition, artistry, and passion.
+                </p>
+            </div>
+            
+            <div class="shop-categories">
+                <div class="shop-category">
+                    <div class="category-image">
+                        <img src="images/pottery1.jpeg" alt="Bowls Collection">
+                    </div>
+                    <h3 data-en="BOWLS" data-hr="ZDJELE">BOWLS</h3>
+                    <p data-en="Handcrafted bowls for everyday elegance" data-hr="Ručno izrađene zdjele za svakodnevnu eleganciju">Handcrafted bowls for everyday elegance</p>
+                    <button class="shop-button" data-en="VIEW COLLECTION" data-hr="POGLEDAJ KOLEKCIJU">VIEW COLLECTION</button>
+                </div>
+                
+                <div class="shop-category">
+                    <div class="category-image">
+                        <img src="images/pottery2.jpeg" alt="Vases Collection">
+                    </div>
+                    <h3 data-en="VASES" data-hr="VAZE">VASES</h3>
+                    <p data-en="Sculptural pieces that bring life to any space" data-hr="Skulpturalni komadi koji unose život u svaki prostor">Sculptural pieces that bring life to any space</p>
+                    <button class="shop-button" data-en="VIEW COLLECTION" data-hr="POGLEDAJ KOLEKCIJU">VIEW COLLECTION</button>
+                </div>
+                
+                <div class="shop-category">
+                    <div class="category-image">
+                        <img src="images/pottery3.jpeg" alt="Plates Collection">
+                    </div>
+                    <h3 data-en="PLATES" data-hr="TANJURI">PLATES</h3>
+                    <p data-en="Dining essentials with artistic flair" data-hr="Osnovni pribor za jelo s umjetničkim dodirom">Dining essentials with artistic flair</p>
+                    <button class="shop-button" data-en="VIEW COLLECTION" data-hr="POGLEDAJ KOLEKCIJU">VIEW COLLECTION</button>
                 </div>
             </div>
             
-            <div class="hero-content">
-                <h2 data-en="Handcrafted Ceramics" data-hr="Ručno izrađena keramika">Ručno izrađena keramika</h2>
-                <p data-en="Beautiful pottery made with passion and tradition" data-hr="Prekrasna keramika napravljena sa strašću i tradicijom">Prekrasna keramika napravljena sa strašću i tradicijom</p>
-                <a href="#gallery" class="cta-button" data-en="View Gallery" data-hr="Pogledaj galeriju">Pogledaj galeriju</a>
+            <div class="shop-cta">
+                <p data-en="Ready to bring artisanal ceramics into your home?" data-hr="Spremni ste unijeti zanatsku keramiku u svoj dom?">Ready to bring artisanal ceramics into your home?</p>
+                <a href="#contact" class="shop-contact-button" data-en="GET IN TOUCH" data-hr="KONTAKTIRAJTE NAS">GET IN TOUCH</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="shop" class="shop">
-            <h2 data-en="Shop Our Ceramics" data-hr="Kupuj našu keramiku">Kupuj našu keramiku</h2>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-content">
+            <h2>ABOUT</h2>
+            <div class="about-text">
+                <p>Traditional craftsmanship meets contemporary design in every piece we create. Our ceramics are born from passion, shaped by tradition, and refined through years of dedication to the art.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-content">
+            <h2>CONTACT</h2>
+            <h2>CONTACT</h2>
             
-            <!-- Category Filters -->
-            <div class="category-filters">
-                <button class="filter-btn active" onclick="filterProducts('all')" data-en="All" data-hr="Sve">Sve</button>
-                <button class="filter-btn" onclick="filterProducts('plates')" data-en="Plates" data-hr="Tanjuri">Tanjuri</button>
-                <button class="filter-btn" onclick="filterProducts('cups')" data-en="Cups" data-hr="Šalice">Šalice</button>
-                <button class="filter-btn" onclick="filterProducts('bowls')" data-en="Bowls" data-hr="Zdjele">Zdjele</button>
-                <button class="filter-btn" onclick="filterProducts('vases')" data-en="Vases" data-hr="Vaze">Vaze</button>
-            </div>
-            
-            <div class="shop-grid">
-                <div class="shop-item" data-category="bowls">
-                    <img src="images/pottery1.jpeg" alt="Handmade Bowl">
-                    <div class="item-info">
-                        <h3 data-en="Handmade Bowl" data-hr="Ručno izrađena zdjela">Ručno izrađena zdjela</h3>
-                        <p data-en="Beautiful ceramic bowl perfect for serving" data-hr="Prekrasna keramička zdjela savršena za posluživanje">Prekrasna keramička zdjela savršena za posluživanje</p>
-                        <div class="category-tag" data-en="Bowls" data-hr="Zdjele">Zdjele</div>
-                        <div class="price">€45.00</div>
-                        <button class="add-to-cart" onclick="addToCart('Handmade Bowl', 45.00, 'images/pottery1.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
-                    </div>
-                </div>
-                <div class="shop-item" data-category="vases">
-                    <img src="images/pottery2.jpeg" alt="Ceramic Vase">
-                    <div class="item-info">
-                        <h3 data-en="Ceramic Vase" data-hr="Keramička vaza">Keramička vaza</h3>
-                        <p data-en="Elegant vase for your favorite flowers" data-hr="Elegantna vaza za vaše omiljeno cvijeće">Elegantna vaza za vaše omiljeno cvijeće</p>
-                        <div class="category-tag" data-en="Vases" data-hr="Vaze">Vaze</div>
-                        <div class="price">€65.00</div>
-                        <button class="add-to-cart" onclick="addToCart('Ceramic Vase', 65.00, 'images/pottery2.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
-                    </div>
-                </div>
-                <div class="shop-item" data-category="cups">
-                    <img src="images/pottery3.jpeg" alt="Coffee Mug">
-                    <div class="item-info">
-                        <h3 data-en="Coffee Mug" data-hr="Šalica za kavu">Šalica za kavu</h3>
-                        <p data-en="Perfect mug for your morning coffee" data-hr="Savršena šalica za vašu jutarnju kavu">Savršena šalica za vašu jutarnju kavu</p>
-                        <div class="category-tag" data-en="Cups" data-hr="Šalice">Šalice</div>
-                        <div class="price">€25.00</div>
-                        <button class="add-to-cart" onclick="addToCart('Coffee Mug', 25.00, 'images/pottery3.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
-                    </div>
-                </div>
-                <div class="shop-item" data-category="plates">
-                    <img src="images/pottery4.jpeg" alt="Decorative Plate">
-                    <div class="item-info">
-                        <h3 data-en="Decorative Plate" data-hr="Ukrasni tanjur">Ukrasni tanjur</h3>
-                        <p data-en="Beautiful plate for display or dining" data-hr="Prekrasan tanjur za izlaganje ili blagovanje">Prekrasan tanjur za izlaganje ili blagovanje</p>
-                        <div class="category-tag" data-en="Plates" data-hr="Tanjuri">Tanjuri</div>
-                        <div class="price">€35.00</div>
-                        <button class="add-to-cart" onclick="addToCart('Decorative Plate', 35.00, 'images/pottery4.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
-                    </div>
-                </div>
-                <div class="shop-item" data-category="vases">
-                    <img src="images/pottery5.jpeg" alt="Ceramic Pitcher">
-                    <div class="item-info">
-                        <h3 data-en="Ceramic Pitcher" data-hr="Keramički vrč">Keramički vrč</h3>
-                        <p data-en="Stylish pitcher for water or juice" data-hr="Elegantan vrč za vodu ili sok">Elegantan vrč za vodu ili sok</p>
-                        <div class="category-tag" data-en="Vases" data-hr="Vaze">Vaze</div>
-                        <div class="price">€55.00</div>
-                        <button class="add-to-cart" onclick="addToCart('Ceramic Pitcher', 55.00, 'images/pottery5.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
-                    </div>
-                </div>
-                <div class="shop-item" data-category="cups">
-                    <img src="images/pottery6.jpeg" alt="Tea Cup Set">
-                    <div class="item-info">
-                        <h3 data-en="Tea Cup Set" data-hr="Set šalica za čaj">Set šalica za čaj</h3>
-                        <p data-en="Complete tea cup set for special occasions" data-hr="Kompletan set šalica za posebne prilike">Kompletan set šalica za posebne prilike</p>
-                        <div class="category-tag" data-en="Cups" data-hr="Šalice">Šalice</div>
-                        <div class="price">€120.00</div>
-                        <button class="add-to-cart" onclick="addToCart('Tea Cup Set', 120.00, 'images/pottery6.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
-                    </div>
-                </div>
-                <div class="shop-item" data-category="bowls">
-                    <img src="images/pottery7.jpeg" alt="Large Serving Bowl">
-                    <div class="item-info">
-                        <h3 data-en="Large Serving Bowl" data-hr="Velika zdjela za posluživanje">Velika zdjela za posluživanje</h3>
-                        <p data-en="Perfect for family meals and gatherings" data-hr="Savršena za obiteljske obroke i okupljanja">Savršena za obiteljske obroke i okupljanja</p>
-                        <div class="category-tag" data-en="Bowls" data-hr="Zdjele">Zdjele</div>
-                        <div class="price">€75.00</div>
-                        <button class="add-to-cart" onclick="addToCart('Large Serving Bowl', 75.00, 'images/pottery7.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
-                    </div>
-                </div>
-                <div class="shop-item" data-category="plates">
-                    <img src="images/pottery8.jpeg" alt="Dinner Plate Set">
-                    <div class="item-info">
-                        <h3 data-en="Dinner Plate Set" data-hr="Set tanjura za večeru">Set tanjura za večeru</h3>
-                        <p data-en="Set of 4 elegant dinner plates" data-hr="Set od 4 elegantna tanjura za večeru">Set od 4 elegantna tanjura za večeru</p>
-                        <div class="category-tag" data-en="Plates" data-hr="Tanjuri">Tanjuri</div>
-                        <div class="price">€95.00</div>
-                        <button class="add-to-cart" onclick="addToCart('Dinner Plate Set', 95.00, 'images/pottery8.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
-                    </div>
-                </div>
-                <div class="shop-item" data-category="bowls">
-                    <img src="images/pottery9.jpeg" alt="Cereal Bowl Set">
-                    <div class="item-info">
-                        <h3 data-en="Cereal Bowl Set" data-hr="Set zdjela za žitarice">Set zdjela za žitarice</h3>
-                        <p data-en="Set of 6 perfect breakfast bowls" data-hr="Set od 6 savršenih zdjela za doručak">Set od 6 savršenih zdjela za doručak</p>
-                        <div class="category-tag" data-en="Bowls" data-hr="Zdjele">Zdjele</div>
-                        <div class="price">€85.00</div>
-                        <button class="add-to-cart" onclick="addToCart('Cereal Bowl Set', 85.00, 'images/pottery9.jpeg')" data-en="Add to Cart" data-hr="Dodaj u košaricu">Dodaj u košaricu</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="gallery" class="gallery">
-            <h2 data-en="Our Collection" data-hr="Naša kolekcija">Naša kolekcija</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item" onclick="openLightbox(0)">
-                    <img src="images/pottery1.jpeg" alt="Ceramic Bowl" data-en="Ceramic Bowl" data-hr="Keramička zdjela">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(1)">
-                    <img src="images/pottery2.jpeg" alt="Ceramic Vase" data-en="Ceramic Vase" data-hr="Keramička vaza">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(2)">
-                    <img src="images/pottery3.jpeg" alt="Ceramic Mug" data-en="Ceramic Mug" data-hr="Keramička šalica">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(3)">
-                    <img src="images/pottery4.jpeg" alt="Ceramic Piece" data-en="Ceramic Piece" data-hr="Keramički komad">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(4)">
-                    <img src="images/pottery5.jpeg" alt="Ceramic Art" data-en="Ceramic Art" data-hr="Keramička umjetnost">
-                </div>
-                <div class="gallery-item" onclick="openLightbox(5)">
-                    <img src="images/pottery6.jpeg" alt="Handmade Pottery" data-en="Handmade Pottery" data-hr="Ručno izrađena keramika">
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="about">
-            <h2 data-en="About Us" data-hr="O nama">O nama</h2>
-            <p data-en="We are passionate ceramicists dedicated to creating beautiful, functional pottery. Each piece is carefully crafted by hand using traditional techniques passed down through generations." data-hr="Mi smo strastveni keramičari posvećeni stvaranju prekrasne, funkcionalne keramike. Svaki komad je pažljivo ručno izrađen koristeći tradicionalne tehnike prenošene kroz generacije.">Mi smo strastveni keramičari posvećeni stvaranju prekrasne, funkcionalne keramike. Svaki komad je pažljivo ručno izrađen koristeći tradicionalne tehnike prenošene kroz generacije.</p>
-        </section>
-
-        <section id="contact" class="contact">
-            <h2 data-en="Contact" data-hr="Kontakt">Kontakt</h2>
             <div class="contact-info">
-                <p><span data-en="Email" data-hr="Email">Email</span>: info@stardicer.hr</p>
-                <p><span data-en="Phone" data-hr="Telefon">Telefon</span>: +385 91 123 4567</p>
-                <p><span data-en="Address" data-hr="Adresa">Adresa</span>: Keramička 123, Zagreb</p>
+                <div class="contact-item">
+                    <h3>STARDI CER</h3>
+                </div>
+                
+                <div class="contact-item">
+                    <h4>EMAIL</h4>
+                    <p>info@stardicer.com</p>
+                    <p>info@stardicer.com</p>
+                </div>
+                
+                <div class="contact-item">
+                    <h4>SOCIAL</h4>
+                    <a href="#" class="social-link">Instagram Instagram</a>
+                    <a href="#" class="social-link">Facebook Facebook</a>
+                </div>
+                
+                <div class="contact-item">
+                    <h4>LOCAL TIME</h4>
+                    <p id="local-time">2025-09-29 12:00:00</p>
+                </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer>
-        <p data-en="&copy; 2025 Stardi Ceramics. All rights reserved." data-hr="&copy; 2025 Stardi Keramika. Sva prava pridržana.">&copy; 2025 Stardi Keramika. Sva prava pridržana.</p>
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-nav">
+            <a href="#home" class="footer-link">HOME HOME</a>
+            <a href="#work" class="footer-link">WORK WORK</a>
+            <a href="#about" class="footer-link">ABOUT ABOUT</a>
+            <a href="#contact" class="footer-link">CONTACT CONTACT</a>
+        </div>
+        <div class="footer-copyright">
+            <p>©2025 Stardi Cer - All Rights Reserved</p>
+        </div>
     </footer>
-
-    <!-- Shopping Cart Sidebar -->
-    <div id="cart-sidebar" class="cart-sidebar">
-        <div class="cart-header">
-            <h3 data-en="Shopping Cart" data-hr="Košarica">Košarica</h3>
-            <button class="close-cart" onclick="toggleCart()">×</button>
-        </div>
-        <div id="cart-items" class="cart-items">
-            <p class="empty-cart" data-en="Your cart is empty" data-hr="Vaša košarica je prazna">Vaša košarica je prazna</p>
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <strong><span data-en="Total" data-hr="Ukupno">Ukupno</span>: $<span id="cart-total">0.00</span></strong>
-            </div>
-            <button class="checkout-btn" onclick="checkout()" id="checkout-btn" disabled data-en="Checkout" data-hr="Naruči">Naruči</button>
-        </div>
-    </div>
-    
-    <!-- Cart Overlay -->
-    <div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
-    
-    <!-- Lightbox Gallery -->
-    <div id="lightbox" class="lightbox">
-        <div class="lightbox-content">
-            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-            <img id="lightbox-image" src="" alt="">
-            <div class="lightbox-caption" id="lightbox-caption"></div>
-            <div class="lightbox-nav">
-                <button class="lightbox-prev" onclick="changeLightboxImage(-1)">❮</button>
-                <button class="lightbox-next" onclick="changeLightboxImage(1)">❯</button>
-            </div>
-            <div class="lightbox-counter">
-                <span id="image-counter">1 / 6</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Theme Switcher -->
-    <div class="theme-switcher">
-        <h4>Design Options</h4>
-        <button class="theme-option active" onclick="switchTheme('option1')">Minimalist Modern</button>
-        <button class="theme-option" onclick="switchTheme('option2')">Bold & Fluid</button>
-        <button class="theme-option" onclick="switchTheme('option3')">Regular & Rigid</button>
-        <button class="theme-option" onclick="switchTheme('option4')">Clean Contemporary</button>
-        <button class="theme-option" onclick="switchTheme('option5')">Playful & Warm</button>
-    </div>
-    
-    <!-- Theme Loading Overlay -->
-    <div id="theme-switching" class="theme-switching">
-        <div class="loader"></div>
-    </div>
 
     <script src="js/script.js"></script>
 </body>
