@@ -19,6 +19,15 @@ document.addEventListener('DOMContentLoaded', function() {
         menuToggle.classList.add('active');
         navOverlay.classList.add('active');
         body.style.overflow = 'hidden';
+        
+        // Make header black when menu is open
+        const header = document.querySelector('.main-header');
+        header.style.backgroundColor = 'rgba(0, 0, 0, 0.98)';
+        header.style.backdropFilter = 'blur(20px)';
+        header.querySelector('.logo h1').style.color = '#f8f8f8';
+        header.querySelectorAll('.menu-line').forEach(line => {
+            line.style.backgroundColor = '#f8f8f8';
+        });
     }
 
     // Close menu when clicking on overlay
@@ -46,6 +55,28 @@ document.addEventListener('DOMContentLoaded', function() {
         menuToggle.classList.remove('active');
         navOverlay.classList.remove('active');
         body.style.overflow = '';
+        
+        // Restore header state based on current scroll position
+        const header = document.querySelector('.main-header');
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY <= 100) {
+            // Back to transparent home state
+            header.style.backgroundColor = 'transparent';
+            header.style.backdropFilter = 'none';
+            header.querySelector('.logo h1').style.color = '#f8f8f8';
+            header.querySelectorAll('.menu-line').forEach(line => {
+                line.style.backgroundColor = '#f8f8f8';
+            });
+        } else {
+            // Back to white scrolled state
+            header.style.backgroundColor = 'rgba(248, 248, 248, 0.98)';
+            header.style.backdropFilter = 'blur(15px)';
+            header.querySelector('.logo h1').style.color = '#2c2c2c';
+            header.querySelectorAll('.menu-line').forEach(line => {
+                line.style.backgroundColor = '#2c2c2c';
+            });
+        }
     }
 
     // Logo click to return home
@@ -138,8 +169,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
-                const headerHeight = document.querySelector('.main-header').offsetHeight;
-                const targetPosition = targetSection.offsetTop - headerHeight - 20;
+                // Check if target section has a hero (full-screen sections)
+                const hasHero = targetSection.querySelector('.section-hero') || targetSection.classList.contains('hero');
+                
+                let targetPosition;
+                if (hasHero) {
+                    // For full-screen hero sections, scroll to exact top
+                    targetPosition = targetSection.offsetTop;
+                } else {
+                    // For regular sections, account for header
+                    const headerHeight = document.querySelector('.main-header').offsetHeight;
+                    targetPosition = targetSection.offsetTop - headerHeight - 20;
+                }
                 
                 window.scrollTo({
                     top: targetPosition,
@@ -162,27 +203,38 @@ document.addEventListener('DOMContentLoaded', function() {
         const header = document.querySelector('.main-header');
         const currentScrollY = window.scrollY;
         
-        // At the top (home section) - transparent header
-        if (currentScrollY <= 100) {
+        // Check if we're in a hero section
+        const heroSections = document.querySelectorAll('.hero, .section-hero');
+        let inHeroSection = false;
+        
+        heroSections.forEach(heroSection => {
+            const sectionTop = heroSection.offsetTop;
+            const sectionBottom = sectionTop + heroSection.offsetHeight;
+            if (currentScrollY >= sectionTop && currentScrollY < sectionBottom) {
+                inHeroSection = true;
+            }
+        });
+        
+        // If in any hero section - force transparent header
+        if (inHeroSection) {
             header.style.transform = 'translateY(0)';
             header.style.backgroundColor = 'transparent';
             header.style.backdropFilter = 'none';
-            // Keep white text/symbols for home
             header.querySelector('.logo h1').style.color = '#f8f8f8';
             header.querySelectorAll('.menu-line').forEach(line => {
                 line.style.backgroundColor = '#f8f8f8';
             });
         }
-        // Scrolling down - hide header
-        else if (currentScrollY > lastScrollY) {
+        // Regular scroll behavior for non-hero sections
+        else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            // Scrolling down - hide header
             header.style.transform = 'translateY(-100%)';
         }
-        // Scrolling up - show header with white background and black text
-        else {
+        else if (currentScrollY < lastScrollY && currentScrollY > 100) {
+            // Scrolling up - show header with white background
             header.style.transform = 'translateY(0)';
             header.style.backgroundColor = 'rgba(248, 248, 248, 0.98)';
             header.style.backdropFilter = 'blur(15px)';
-            // Change to black text/symbols when header has background
             header.querySelector('.logo h1').style.color = '#2c2c2c';
             header.querySelectorAll('.menu-line').forEach(line => {
                 line.style.backgroundColor = '#2c2c2c';
