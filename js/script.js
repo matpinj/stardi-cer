@@ -56,11 +56,23 @@ document.addEventListener('DOMContentLoaded', function() {
         navOverlay.classList.remove('active');
         body.style.overflow = '';
         
-        // Restore header state based on current scroll position
+        // Restore header state based on current position
         const header = document.querySelector('.main-header');
         const currentScrollY = window.scrollY;
         
-        if (currentScrollY <= 100) {
+        // Check if we're in the main home hero section
+        const mainHero = document.querySelector('.hero');
+        let inMainHero = false;
+        
+        if (mainHero) {
+            const sectionTop = mainHero.offsetTop;
+            const sectionBottom = sectionTop + mainHero.offsetHeight;
+            if (currentScrollY >= sectionTop && currentScrollY < sectionBottom) {
+                inMainHero = true;
+            }
+        }
+        
+        if (inMainHero) {
             // Back to transparent home state
             header.style.backgroundColor = 'transparent';
             header.style.backdropFilter = 'none';
@@ -69,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 line.style.backgroundColor = '#f8f8f8';
             });
         } else {
-            // Back to white scrolled state
+            // Back to white state with black text
             header.style.backgroundColor = 'rgba(248, 248, 248, 0.98)';
             header.style.backdropFilter = 'blur(15px)';
             header.querySelector('.logo h1').style.color = '#2c2c2c';
@@ -203,20 +215,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const header = document.querySelector('.main-header');
         const currentScrollY = window.scrollY;
         
-        // Check if we're in a hero section
-        const heroSections = document.querySelectorAll('.hero, .section-hero');
-        let inHeroSection = false;
+        // Check if we're in the main home hero section only
+        const mainHero = document.querySelector('.hero');
+        let inMainHero = false;
         
-        heroSections.forEach(heroSection => {
-            const sectionTop = heroSection.offsetTop;
-            const sectionBottom = sectionTop + heroSection.offsetHeight;
+        if (mainHero) {
+            const sectionTop = mainHero.offsetTop;
+            const sectionBottom = sectionTop + mainHero.offsetHeight;
             if (currentScrollY >= sectionTop && currentScrollY < sectionBottom) {
-                inHeroSection = true;
+                inMainHero = true;
             }
-        });
+        }
         
-        // If in any hero section - force transparent header
-        if (inHeroSection) {
+        // If in main hero section - transparent header with white text
+        if (inMainHero) {
             header.style.transform = 'translateY(0)';
             header.style.backgroundColor = 'transparent';
             header.style.backdropFilter = 'none';
@@ -225,20 +237,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 line.style.backgroundColor = '#f8f8f8';
             });
         }
-        // Regular scroll behavior for non-hero sections
-        else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-            // Scrolling down - hide header
-            header.style.transform = 'translateY(-100%)';
-        }
-        else if (currentScrollY < lastScrollY && currentScrollY > 100) {
-            // Scrolling up - show header with white background
-            header.style.transform = 'translateY(0)';
-            header.style.backgroundColor = 'rgba(248, 248, 248, 0.98)';
-            header.style.backdropFilter = 'blur(15px)';
-            header.querySelector('.logo h1').style.color = '#2c2c2c';
-            header.querySelectorAll('.menu-line').forEach(line => {
-                line.style.backgroundColor = '#2c2c2c';
-            });
+        // Everywhere else - always black text with white background
+        else {
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                // Scrolling down - hide header
+                header.style.transform = 'translateY(-100%)';
+            }
+            else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
+                // Scrolling up or at top - show header with white background and black text
+                header.style.transform = 'translateY(0)';
+                header.style.backgroundColor = 'rgba(248, 248, 248, 0.98)';
+                header.style.backdropFilter = 'blur(15px)';
+                header.querySelector('.logo h1').style.color = '#2c2c2c';
+                header.querySelectorAll('.menu-line').forEach(line => {
+                    line.style.backgroundColor = '#2c2c2c';
+                });
+            }
         }
         
         lastScrollY = currentScrollY;
@@ -449,6 +463,255 @@ function addScrollProgress() {
 // Initialize scroll progress
 addScrollProgress();
 
+// Shop horizontal slider
+function initShopSlider() {
+    const slides = document.querySelectorAll('.shop-slide');
+    const prevBtn = document.querySelector('.slider-prev');
+    const nextBtn = document.querySelector('.slider-next');
+    
+    if (!slides.length) return;
+    
+    let currentSlide = 0;
+    
+    function updateSlider() {
+        // Clear any inline styles and update slides with proper state management
+        slides.forEach((slide, index) => {
+            slide.style.transform = '';
+            slide.style.opacity = '';
+            slide.style.visibility = '';
+            slide.classList.remove('active', 'prev', 'next');
+            
+            if (index === currentSlide) {
+                slide.classList.add('active');
+            } else {
+                // Handle circular logic for proper slide directions
+                const isLoopingForward = currentSlide === 0 && index === slides.length - 1;
+                const isLoopingBackward = currentSlide === slides.length - 1 && index === 0;
+                
+                if (isLoopingForward) {
+                    // When CUPS is active, WAVES should be positioned as "prev" (left side for left arrow)
+                    slide.classList.add('prev');
+                } else if (isLoopingBackward) {
+                    // When WAVES is active, CUPS should be positioned as "next" (right side for right arrow)
+                    slide.classList.add('next');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                } else {
+                    slide.classList.add('next');
+                }
+            }
+        });
+        
+        // Arrows are always active since we have infinite loop
+        prevBtn.style.opacity = '1';
+        nextBtn.style.opacity = '1';
+    }
+    
+    let isTransitioning = false;
+    
+    function nextSlide() {
+        if (!isTransitioning) {
+            isTransitioning = true;
+            const nextIndex = currentSlide < slides.length - 1 ? currentSlide + 1 : 0;
+            currentSlide = nextIndex;
+            updateSlider();
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 800);
+        }
+    }
+    
+    function prevSlide() {
+        if (!isTransitioning) {
+            isTransitioning = true;
+            const prevIndex = currentSlide > 0 ? currentSlide - 1 : slides.length - 1;
+            currentSlide = prevIndex;
+            updateSlider();
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 800);
+        }
+    }
+    
+    function goToSlide(index) {
+        if (index >= 0 && index < slides.length && !isTransitioning) {
+            isTransitioning = true;
+            currentSlide = index;
+            updateSlider();
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 800);
+        }
+    }
+    
+    // Event listeners
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        const shopSection = document.querySelector('.shop');
+        const rect = shopSection.getBoundingClientRect();
+        const isVisible = rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.5;
+        
+        if (!isVisible) return;
+        
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            prevSlide();
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            nextSlide();
+        }
+    });
+    
+    // Touch/swipe support
+    let startX = 0;
+    let startY = 0;
+    
+    const shopSlider = document.querySelector('.shop-slider');
+    
+    shopSlider.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    });
+    
+    shopSlider.addEventListener('touchend', function(e) {
+        if (!startX || !startY) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+        
+        // Only respond to horizontal swipes
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                // Swipe left - next slide
+                nextSlide();
+            } else {
+                // Swipe right - previous slide
+                prevSlide();
+            }
+        }
+        
+        startX = 0;
+        startY = 0;
+    });
+    
+    // Learn More button handlers
+    const learnMoreBtns = document.querySelectorAll('.learn-more-btn');
+    learnMoreBtns.forEach((btn, index) => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const categories = ['CUPS&SAUCERS', 'HAND BUILDING', 'BOWLS', 'TEAPOTS'];
+            alert(`Opening ${categories[currentSlide]} gallery - coming soon!`);
+        });
+    });
+    
+    // Initialize
+    updateSlider();
+}
+
+// Initialize shop slider
+initShopSlider();
+
+// About section slider
+function initAboutSlider() {
+    const slides = document.querySelectorAll('.about-slide');
+    const prevBtn = document.querySelector('.about-slider-container .slider-prev');
+    const nextBtn = document.querySelector('.about-slider-container .slider-next');
+    
+    if (!slides.length) return;
+    
+    let currentSlide = 0;
+    
+    function updateSlider() {
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active');
+            if (index === currentSlide) {
+                slide.classList.add('active');
+            }
+        });
+    }
+    
+    let isTransitioning = false;
+    
+    function nextSlide() {
+        if (!isTransitioning) {
+            isTransitioning = true;
+            const nextIndex = currentSlide < slides.length - 1 ? currentSlide + 1 : 0;
+            currentSlide = nextIndex;
+            updateSlider();
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 500);
+        }
+    }
+    
+    function prevSlide() {
+        if (!isTransitioning) {
+            isTransitioning = true;
+            const prevIndex = currentSlide > 0 ? currentSlide - 1 : slides.length - 1;
+            currentSlide = prevIndex;
+            updateSlider();
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 500);
+        }
+    }
+    
+    // Event listeners
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    
+    // Keyboard navigation for about section
+    document.addEventListener('keydown', function(e) {
+        const aboutSection = document.querySelector('.about');
+        if (!aboutSection) return;
+        
+        const rect = aboutSection.getBoundingClientRect();
+        const isVisible = rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.5;
+        
+        if (!isVisible) return;
+        
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            prevSlide();
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            nextSlide();
+        }
+    });
+    
+    // Touch support for about slider
+    const aboutSlider = document.querySelector('.about-slider');
+    if (aboutSlider) {
+        aboutSlider.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+        });
+        
+        aboutSlider.addEventListener('touchend', function(e) {
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchDiff = touchStartX - touchEndX;
+            
+            if (Math.abs(touchDiff) > 50) {
+                if (touchDiff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        });
+    }
+    
+    // Initialize
+    updateSlider();
+}
+
+// Initialize about slider
+initAboutSlider();
+
 // Performance optimization: Debounce scroll events
 function debounce(func, wait) {
     let timeout;
@@ -469,3 +732,234 @@ const debouncedScrollHandler = debounce(function() {
 
 window.removeEventListener('scroll', highlightActiveNavigation);
 window.addEventListener('scroll', debouncedScrollHandler);
+
+// Gallery Modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const modal = document.getElementById('gallery-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalVideo = document.getElementById('modal-video');
+    const modalClose = document.querySelector('.modal-close');
+    const modalPrev = document.querySelector('.modal-prev');
+    const modalNext = document.querySelector('.modal-next');
+    const modalCurrent = document.getElementById('modal-current');
+    const modalTotal = document.getElementById('modal-total');
+    
+    let currentIndex = 0;
+    
+    // Gallery data
+    const galleryData = [
+        { type: 'image', src: 'images/inspirations/IMG_7791.JPG', alt: 'Ceramic inspiration' },
+        { type: 'image', src: 'images/inspirations/IMG_7911.JPG', alt: 'Ceramic inspiration' },
+        { type: 'image', src: 'images/inspirations/IMG_7945.JPG', alt: 'Ceramic inspiration' },
+        { type: 'image', src: 'images/inspirations/IMG_7963.JPG', alt: 'Ceramic inspiration' },
+        { type: 'image', src: 'images/inspirations/IMG_7966.JPG', alt: 'Ceramic inspiration' },
+        { type: 'image', src: 'images/inspirations/IMG_7970.JPG', alt: 'Ceramic inspiration' }
+    ];
+    
+    // Check if modal elements exist
+    if (!modal) return;
+    
+    // Update modal total
+    modalTotal.textContent = galleryData.length;
+    
+    // Open modal
+    function openModal(index) {
+        currentIndex = index;
+        showMedia(currentIndex);
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    // Close modal
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        // Pause video if playing
+        if (modalVideo && !modalVideo.paused) {
+            modalVideo.pause();
+        }
+    }
+    
+    // Show media at current index
+    function showMedia(index) {
+        const item = galleryData[index];
+        modalCurrent.textContent = index + 1;
+        
+        if (item.type === 'image') {
+            modalImage.src = item.src;
+            modalImage.alt = item.alt;
+            modalImage.style.display = 'block';
+            modalVideo.style.display = 'none';
+            if (modalVideo) modalVideo.pause();
+        } else if (item.type === 'video') {
+            const videoSource = modalVideo.querySelector('source');
+            videoSource.src = item.src;
+            modalVideo.load();
+            modalVideo.style.display = 'block';
+            modalImage.style.display = 'none';
+        }
+    }
+    
+    // Navigate to previous item
+    function showPrevious() {
+        currentIndex = (currentIndex - 1 + galleryData.length) % galleryData.length;
+        showMedia(currentIndex);
+    }
+    
+    // Navigate to next item
+    function showNext() {
+        currentIndex = (currentIndex + 1) % galleryData.length;
+        showMedia(currentIndex);
+    }
+    
+    // Event listeners
+    galleryItems.forEach((item, index) => {
+        item.addEventListener('click', () => openModal(index));
+    });
+    
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (modalPrev) modalPrev.addEventListener('click', showPrevious);
+    if (modalNext) modalNext.addEventListener('click', showNext);
+    
+    // Close modal when clicking outside content
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('active')) return;
+        
+        switch(e.key) {
+            case 'Escape':
+                closeModal();
+                break;
+            case 'ArrowLeft':
+                showPrevious();
+                break;
+            case 'ArrowRight':
+                showNext();
+                break;
+        }
+    });
+});
+
+// Video Reverse Looping for Hero Sections
+document.addEventListener('DOMContentLoaded', function() {
+    const heroVideos = document.querySelectorAll('.video-background video');
+    
+    heroVideos.forEach(video => {
+        let isPlayingForward = true;
+        let reverseInterval;
+        
+        video.addEventListener('loadedmetadata', function() {
+            // Start playing forward
+            video.currentTime = 0;
+            isPlayingForward = true;
+        });
+        
+        video.addEventListener('timeupdate', function() {
+            // When video reaches the end, start manual reverse playback
+            if (isPlayingForward && video.currentTime >= video.duration - 0.1) {
+                startReversePlayback();
+            }
+        });
+        
+        function startReversePlayback() {
+            isPlayingForward = false;
+            video.pause();
+            
+            // Clear any existing interval
+            if (reverseInterval) {
+                clearInterval(reverseInterval);
+            }
+            
+            // Manually step backward through frames
+            reverseInterval = setInterval(() => {
+                if (video.currentTime <= 0.1) {
+                    // Reached the beginning, start forward playback again
+                    clearInterval(reverseInterval);
+                    isPlayingForward = true;
+                    video.currentTime = 0;
+                    video.play();
+                } else {
+                    // Step backward (adjust step size for smoother/faster reverse)
+                    video.currentTime -= 0.05; // 50ms steps backward
+                }
+            }, 33); // ~30fps for smooth reverse playback
+        }
+        
+        // Handle the ended event as a fallback
+        video.addEventListener('ended', function() {
+            if (isPlayingForward) {
+                startReversePlayback();
+            }
+        });
+        
+        // Clean up interval when video is paused or removed
+        video.addEventListener('pause', function() {
+            if (reverseInterval) {
+                clearInterval(reverseInterval);
+            }
+            // Don't auto-restart during reverse playback
+            if (isPlayingForward) {
+                setTimeout(() => {
+                    if (video.paused && isPlayingForward) {
+                        video.play();
+                    }
+                }, 100);
+            }
+        });
+    });
+});
+
+// Text Animation on Scroll
+document.addEventListener('DOMContentLoaded', function() {
+    const animateElements = document.querySelectorAll('.animate-text');
+    
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Add animation class
+                entry.target.classList.add('in-view');
+                entry.target.style.animation = 'fadeInUp 1s ease forwards';
+                
+                // Optional: Stop observing after animation
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.3, // Trigger when 30% of element is visible
+        rootMargin: '0px 0px -100px 0px' // Start animation 100px before element enters viewport
+    });
+    
+    // Start observing all animate elements
+    animateElements.forEach(element => {
+        observer.observe(element);
+    });
+    
+    // Fallback scroll listener for better compatibility
+    function checkScroll() {
+        animateElements.forEach(element => {
+            if (!element.classList.contains('in-view')) {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('in-view');
+                    element.style.animation = 'fadeInUp 1s ease forwards';
+                }
+            }
+        });
+    }
+    
+    // Add scroll event listener as backup
+    window.addEventListener('scroll', checkScroll);
+    
+    // Check on load in case elements are already in view
+    checkScroll();
+});
